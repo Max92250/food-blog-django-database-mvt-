@@ -127,6 +127,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -139,5 +140,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER ="your email" #sender's email-id
-EMAIL_HOST_PASSWORD = "your password"#password associated with above email-idyour password
+EMAIL_HOST_USER ="maxrai788@gmail.com" #sender's email-id
+EMAIL_HOST_PASSWORD = "Maxrai123@"#password associated with above email-idyour password
