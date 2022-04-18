@@ -8,39 +8,41 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from datetime import datetime
-from myapp.models import Services
+from myapp.models import Contact
 from django.contrib import messages
+from django.template import loader  
 
-def index(request) :
-
-   context = {
-     'max':'my name is max chamling rai'
-    }
-
-   return render(request, "max.htm",context)
-
+def index(request):  
+   template = loader.get_template('max.htm') # getting our template  
+   return HttpResponse(template.render())       # rendering the template in HttpResponse  
 
 
 def about(request):
-     return render(request, "max.htm")
+   max= loader.get_template('max.htm') # getting our template  
+   return HttpResponse(max.render())       # rendering the template in HttpResponse  
+
 
 
 def services(request):
+    
     if request.method == "POST":
        name = request.POST.get('name')
        email = request.POST.get('email')
        phone = request.POST.get('phone')
        desc = request.POST.get('desc')
-       max=Services(name=name,email=email,phone=phone,desc=desc,
+       rai=Contact(name=name,email=email,phone=phone,desc=desc,
        date=datetime.today())
-       max.save()
+       rai.save()
        messages.success(request,'your message have been collected in our databaase ☢☢')
 
-    return render(request, "services.htm")
+    return render(request,"services.htm")       # rendering the template in HttpResponse  
+
+
 
 
 def condition(request):
-     return render(request, "condition.htm")
+   condition = loader.get_template('condition.htm') # getting our template  
+   return HttpResponse(condition.render())       # rendering the template in HttpResponse  
 
 
   

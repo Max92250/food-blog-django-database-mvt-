@@ -1,9 +1,9 @@
-import email
-from statistics import mode
+
+
 from django.db import models
 
 # Create your models here.
-class Services(models.Model):
+class Contact(models.Model):
     name=models.CharField(max_length=122)
     email=models.CharField(max_length=122)
     phone = models.CharField(max_length=122)
@@ -12,3 +12,5 @@ class Services(models.Model):
     
     def __str__(self):
         return self.name
+    
+   

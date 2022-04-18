@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from msilib.schema import Media
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
@@ -131,3 +132,12 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     
 ]
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / 'media'
+LOGIN_REDIRECT_URL = "max"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER ="your email" #sender's email-id
+EMAIL_HOST_PASSWORD = "your password"#password associated with above email-idyour password
