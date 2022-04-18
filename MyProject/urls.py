@@ -18,6 +18,8 @@ from django.urls import path,include
 admin.site.site_header = "MAX CHAMLING Admin"
 admin.site.site_title = "CHAMLING Portal"
 admin.site.index_title = "Welcome to Max chamling protel"
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -8,15 +8,16 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from datetime import datetime
-from myapp.models import Contact
+from myapp.models import Contact,Employee
 from django.contrib import messages
 from django.template import loader  
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from myapp.forms import EmployeeForm
 from django.contrib.auth.forms import AuthenticationForm
-from myapp.forms import UserRegisterForm
+
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
@@ -57,7 +58,7 @@ def condition(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = EmployeeForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -74,9 +75,12 @@ def register(request):
             messages.success(request, f'Your account has been created ! You are now able to log in')
             return redirect('login')
     else:
-        form = UserRegisterForm()
+        form = EmployeeForm()
     return render(request, 'register.htm', {'form': form, 'title':'reqister here'})
-  
+def show(request):  
+    employees = Employee.objects.all()  
+   
+    return render(request,"show.htm",{'employees':employees,})  
 ################ login forms###################################################
 def Login(request):
     if request.method == 'POST':
@@ -88,10 +92,10 @@ def Login(request):
         user = authenticate(request, username = username, password = password)
         if user is not None:
             form = login(request, user)
-            messages.success(request, f' wecome {username} !!')
+            messages.success(request, f' welcome {username} !!')
             return redirect('index')
         else:
-            messages.info(request, f'account done not exit plz sign in')
+           messages.info(request, f'account done not exit plz sign in')
     form = AuthenticationForm()
     return render(request, 'login.htm', {'form':form, 'title':'log in'})
   
