@@ -13,7 +13,19 @@
 </head>
 <body>
     
-
+  {% if messages %}
+  {% for message in messages %}
+      
+      
+  <div style="position: absolute;top:-40;padding-left: 20px;background-color: rgb(161, 218, 76);
+  width:1600px;color:rgb(65, 78, 49)">
+      {{message}}
+  </div>
+  
+        {% endfor %}
+      
+      {% endif %}
+  
   
     <form method="POST" style="border: 1px solid green; width:60%;height:330px;margin:0 auto;margin-top:30px;  border-radius:1%;text-align:center">
       {% csrf_token %}

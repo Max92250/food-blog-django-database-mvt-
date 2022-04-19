@@ -60,20 +60,31 @@ def register(request):
     if request.method == 'POST':
         form = EmployeeForm(request.POST)
         if form.is_valid():
-            form.save()
+            
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
+            if Employee.objects.filter(username=username).exists():
+                messages.info(request,'username taken')
+                return  redirect('register')
+            elif Employee.objects.filter(email=email).exists():
+                messages.info(request,'email taken')
+                return  redirect('register')    
+            
             ######################### mail system ####################################
-            htmly = get_template('Email.htm')
-            d = { 'username': username }
-            subject, from_email, to = 'welcome', 'your_email@gmail.com', email
-            html_content = htmly.render(d)
-            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
+            else:
+                form.save()
+                htmly = get_template('Email.htm')
+                d = { 'username': username }
+                subject, from_email, to = 'welcome', 'your_email@gmail.com', email
+                html_content = htmly.render(d)
+                msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
             ##################################################################
-            messages.success(request, f'Your account has been created ! You are now able to log in')
+                messages.success(request, f'Your account has been created ! You are now able to log in')
             return redirect('login')
+
+            
     else:
         form = EmployeeForm()
     return render(request, 'register.htm', {'form': form, 'title':'reqister here'})
@@ -95,8 +106,11 @@ def Login(request):
             messages.success(request, f' welcome {username} !!')
             return redirect('index')
         else:
-           messages.info(request, f'account done not exit plz sign in')
+           messages.info(request, f'account done not exit plz sign up')
     form = AuthenticationForm()
     return render(request, 'login.htm', {'form':form, 'title':'log in'})
   
 
+def show(request):  
+    employee = Employee.objects.all()  
+    return render(request,'show.htm', {'employee':employee}) 
