@@ -4,4 +4,6 @@ class EmployeeForm(forms.ModelForm):
     class Meta:  
         model = Employee  
   
-        fields =['username','email','password','phone']
+        fields =['username','email','password']
+
+        

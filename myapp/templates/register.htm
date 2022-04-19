@@ -15,7 +15,7 @@
     
 
   
-    <form method="POST" style="border: 1px solid green; width:60%;height:500px;margin:0 auto;margin-top:30px;  border-radius:1%;text-align:center">
+    <form method="POST" style="border: 1px solid green; width:60%;height:330px;margin:0 auto;margin-top:30px;  border-radius:1%;text-align:center">
       {% csrf_token %}
       <label for="exampleInputPassword1" style="color:blue" class="form-label"><H2>SIGNUP</H2></label>
         <div class="mb-4 mt-4 " form-group">
@@ -29,11 +29,7 @@
           </div>
         </div>
          
-        <div class="mb-2 form-group">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          {{form.phone}}
-        </div>
-     
+        
         <div class="mb-2 form-group">
           <label for="exampleInputPassword1" class="form-label">Password</label>
           {{form.password}}
