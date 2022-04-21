@@ -27,27 +27,28 @@
       {% endif %}
   
   
-    <form method="POST" style="border: 1px solid green; width:60%;height:330px;margin:0 auto;margin-top:30px;  border-radius:1%;text-align:center">
+      <form style="width: 550px;
+    margin:0 auto;margin-top: 100px;
+    "  method="post" >
       {% csrf_token %}
-      <label for="exampleInputPassword1" style="color:blue" class="form-label"><H2>SIGNUP</H2></label>
-        <div class="mb-4 mt-4 " form-group">
-       <label for="exampleInputPassword1" class="form-label">username:</label>
-       {{form.username}}
+      <div class="mb-3 form-group">
+        <label for="exampleInputEmail1" class="form-label">Name</label>
+        <input type="name" class="form-control" id="name" name='username' aria-describedby="emailHelp">
+
+      </div>
+        <div class="mb-3 form-group">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
-        <div class="mb-2 form-group 
-          <div style="margin-top:20px;">
-          <label for="exampleInputPassword1" class="form-label">Email:</label>
-          {{form.email}}
-          </div>
+        <div class="mb-3 form-group">
+          <label for="exampleInputPassword1" class="form-label">Phone number</label>
+          <input type="password" class="form-control" name="password" id="exampleInputPassword1">
         </div>
-         
-        
-        <div class="mb-2 form-group">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          {{form.password}}
-        </div>
-      
     
+       
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
       
       <center>
         <button style="background: black;  font-size: 1rem; color:white;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-check"></span> &nbsp; sign up</button>

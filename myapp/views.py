@@ -22,7 +22,7 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
-  
+from django.contrib.auth.models import User,auth
 
 def index(request):  
    template = loader.get_template('max.htm') # getting our template  
@@ -87,7 +87,7 @@ def register(request):
             
     else:
         form = EmployeeForm()
-    return render(request, 'register.htm', {'form': form, 'title':'reqister here'})
+    return render(request, 'register.htm')
 def show(request):  
     employees = Employee.objects.all()  
    
@@ -98,17 +98,19 @@ def Login(request):
   
         # AuthenticationForm_can_also_be_used__
   
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username = username, password = password)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = auth.authenticate( username = username, password = password)
         if user is not None:
-            form = login(request, user)
+            auth.login(request, user)
             messages.success(request, f' welcome {username} !!')
             return redirect('index')
         else:
            messages.info(request, f'account done not exit plz sign up')
-    form = AuthenticationForm()
-    return render(request, 'login.htm', {'form':form, 'title':'log in'})
+ 
+           return redirect('login')
+    else:
+        return render(request,'login.htm')       
   
 
 def show(request):  
